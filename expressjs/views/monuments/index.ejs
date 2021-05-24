@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title><%= title %></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+   
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+</head>
+
+<body onload="insertText();">
+  <style>
+    #map{
+      height:300px;
+      width:90%;
+      margin-left: auto;
+      margin-right: auto;
+      
+
+    }
+    h1{
+      
+      font-size: 48px;
+  text-shadow: -1px -1px #f00, 1px 1px #a00, -3px 0 4px #000;
+  font-family:"Segoe print", Arial, Helvetica, sans-serif;
+  color: #6bf;
+  padding:64px 0 0 0;
+  margin:16px auto;
+  font-weight:lighter;
+  -moz-box-shadow:none;  
+  -webkit-box-shadow: none;  
+  box-shadow:none;  
+  text-align:center;
+  display:block;
+  min-height:172px;
+  min-width:800;
+  max-height:172px;
+  max-width:800px;  
+  
+    }
+    #butt{
+      margin-left: auto;
+      margin-right: auto;
+      border-spacing: 5px;
+
+    }
+    body{
+      background-color: rgb(173, 218, 245);
+    }
+    table{
+      background-color: rgb(103, 129, 168);
+    }
+    a{
+      display:block;
+width:150px;
+line-height:50px;
+text-align:center;
+
+background:url(images/bouton-noir.png) no-repeat;
+color:white;
+text-decoration:none;
+}
+.bouton a:hover {
+background:url(images/bouton-noir-2.png) no-repeat;
+    }
+
+  </style>
+
+<div class="container">
+  <strong><h1><%= title %></h1><br/><br/></strong>
+  <a href="/monuments/add" class="btn btn-sm btn-primary" id="butt">Add Monument</a>
+  <a href="../.." class="btn btn-sm btn-primary"id="butt">Show Etudiants</a><br/><br/>
+
+  <table class="table  table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>NOM</th>
+		<th>latitude</th>
+		<th>longitude</th>
+		<th>ville</th>
+    <th>Etat</th>
+
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% etudiant.forEach(function(e){ %>
+            <tr>
+                <td><%= e.id %></td>
+                <td><%= e.nom %></td>
+                <td><%= e.latitude %></td>
+				<td><%= e.longitude %></td>
+				<td><%= e.ville %></td>
+        <td id='<%= e.id %>'></td>
+        
+        
+        
+                <td>
+                    <a href="monuments/edit/<%= e.id %>" class="btn btn-sm btn-primary">Edit</a>
+                    <a href="monuments/delete/<%= e.id %>" class="btn btn-sm btn-danger">Delete</a>
+                    
+
+                </td>
+            </tr>
+        <% }); %>
+    </tbody>
+  </table>
+</div>
+
+
+  </form>      
+  
+  <div id='map'></div>       
+  <script> 
+  var tr=new Array();
+  var tr1=new Array();
+  var tr2=new Array();
+  
+
+  var map = L.map('map').setView([31.4831175, -7.09262], 4);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map); 
+
+  '<% etudiant.forEach(function(e){ %>'
+  L.marker(['<%= e.latitude %>', '<%= e.longitude %>']).addTo(map)
+    .bindPopup("<td><%= e.nom %></td>")
+    .openPopup();
+    tr.push('<%= e.id %>');
+    tr1.push('<%= e.latitude %>');
+    tr2.push('<%= e.longitude %>');
+    '<% }); %>'
+    
+  
+  
+  
+  
+  
+
+    for (i = 0; i < tr.length; i++){
+
+insertText(tr[i],tr1[i],tr2[i]);
+}
+function insertText(a,b,c){
+
+
+
+function showPosition(position) {
+
+
+
+
+
+  
+var x=parseFloat(position.coords.latitude-1.0);
+var y=parseFloat(position.coords.latitude+1.0);
+var u=parseFloat(position.coords.longitude-1.0);
+var v =parseFloat(position.coords.longitude+1.0);
+if (x<=parseFloat(b) && parseFloat(b)<=y + 1.0 && u<=parseFloat(c)&&parseFloat(c)<=v){
+
+document.getElementById(a).innerHTML = "YOU HAVE VISITED THIS PLACE YOU KNOW";
+
+}
+
+else{
+
+document.getElementById(a).innerHTML = "YOU DON'T HAVE VISIT THIS PLACE";
+
+}
+
+
+
+}
+
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(showPosition);
+} else {
+  alert("Geolocation is not supported by this browser.");
+}
+
+}
+
+
+  </script>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXiKlz-u4w3wOeTD8XyOcLfYzZ4FMzXR4&callback=initMap">
+    </script>
+
+
+</body>
+</html>

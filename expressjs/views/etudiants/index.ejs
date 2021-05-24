@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title><%= title %></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <style>
+    
+    h1{
+      
+      font-size: 48px;
+  text-shadow: -1px -1px #f00, 1px 1px #a00, -3px 0 4px #000;
+  font-family:"Segoe print", Arial, Helvetica, sans-serif;
+  color: #6bf;
+  padding:64px 0 0 0;
+  margin:16px auto;
+  font-weight:lighter;
+  -moz-box-shadow:none;  
+  -webkit-box-shadow: none;  
+  box-shadow:none;  
+  text-align:center;
+  display:block;
+  min-height:172px;
+  min-width:800;
+  max-height:172px;
+  max-width:800px;  
+  
+    }
+    #butt{
+      margin-left: auto;
+      margin-right: auto;
+      border-spacing: 5px;
+
+    }
+    body{
+      background-color: rgb(173, 218, 245);
+    }
+    table{
+      background-color: rgb(103, 129, 168);
+    }
+    a{
+      display:block;
+width:150px;
+line-height:50px;
+text-align:center;
+
+background:url(images/bouton-noir.png) no-repeat;
+color:white;
+text-decoration:none;
+}
+.bouton a:hover {
+background:url(images/bouton-noir-2.png) no-repeat;
+    }
+
+  </style>
+
+<div class="container">
+  <h1><%= title %></h1>
+  <a href="/add" class="btn btn-sm btn-primary" id=butt>Add User</a>
+  <a href="/monuments" class="btn btn-sm btn-primary" id=butt>Show Monuments</a><br/><br/>
+  
+
+  <table class="table  table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>NOM</th>
+        <th>latitude</th>
+		<th>longitude</th>
+        
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% etudiant.forEach(function(e){ %>
+            <tr>
+                <td><%= e.id %></td>
+                <td><%= e.nom %></td>
+                <td><%= e.latitude %></td>
+				<td><%= e.longitude %></td>
+                
+                <td>
+                    <a href="edit/<%= e.id %>" class="btn btn-sm btn-primary">Edit</a>
+                    <a href="delete/<%= e.id %>" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        <% }); %>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

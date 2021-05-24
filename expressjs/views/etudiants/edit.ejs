@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title><%= title %></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <body>
+    <style>
+      
+      
+      #butt{
+        margin-left: auto;
+        margin-right: auto;
+        border-spacing: 5px;
+  
+      }
+      body{
+        background-color: rgb(173, 218, 245);
+      }
+      table{
+        background-color: rgb(103, 129, 168);
+      }
+      a{
+        display:block;
+  width:150px;
+  line-height:50px;
+  text-align:center;
+  
+  background:url(images/bouton-noir.png) no-repeat;
+  color:white;
+  text-decoration:none;
+  }
+  .bouton a:hover {
+  background:url(images/bouton-noir-2.png) no-repeat;
+      }
+  
+    </style>
+
+<div class="container">
+  <h2><%= title %></h2>
+  <form action="/update" method="post">
+   
+    <div class="form-group">
+      <label for="id">Id:</label>
+      <input type="text" class="form-control" id="email" placeholder="Enter id" value="<%= e.id %>" name="id" required>
+    </div>
+    <div class="form-group">
+      <label for="nom">Nom:</label>
+      <input type="text" class="form-control" id="email" placeholder="Enter name" value="<%= e.nom %>" name="nom" required>
+    </div>
+    <div class="form-group">
+      <label for="nom">latitude:</label>
+      <input type="text" class="form-control" id="email" placeholder="Enter latitude" value="<%= e.latitude %>" name="latitude" required>
+    </div>
+    <div class="form-group">
+      <label for="nom">longitude:</label>
+      <input type="text" class="form-control" id="email" placeholder="Enter longitude" value="<%= e.longitude %>" name="longitude" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+</body>
+</html>
